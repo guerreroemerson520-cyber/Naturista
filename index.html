@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ECUAPERU — Suplementos y remedios naturistas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #1F8A4C;
+    --forest-deep: #0F5C31;
+    --mint: #E4F5EA;
+    --mint-line: #BFE6CE;
+    --white: #FFFFFF;
+    --amber: #E8722C;
+    --amber-bg: #FDE7D8;
+    --text: #1E241F;
+    --text-muted: #5B685D;
+  }
+  * { box-sizing: border-box; }
+  html { overflow-x: hidden; }
+  body {
+    margin: 0;
+    background: var(--white);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+  .serif { font-family: 'Fraunces', serif; }
+
+  nav {
+    padding: 18px 6% 0;
+    border-bottom: 1px solid var(--mint-line);
+  }
+  .nav-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo { display: flex; align-items: center; gap: 8px; }
+  .logo-marca {
+    font-family: 'Fraunces', serif;
+    font-size: 21px;
+    font-weight: 600;
+    color: var(--forest);
+    letter-spacing: -0.01em;
+  }
+  .logo-tag {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: block;
+  }
+  .nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    padding: 12px 0;
+    margin-top: 10px;
+    border-top: 1px solid var(--mint-line);
+  }
+  .nav-links button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--text-muted);
+    border-bottom: 2px solid transparent;
+    padding-bottom: 4px;
+  }
+  .nav-links button.activo {
+    color: var(--forest);
+    border-bottom-color: var(--amber);
+    font-weight: 600;
+  }
+
+  section { display: none; }
+  section.activa { display: block; }
+
+  /* Inicio */
+  .hero {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    padding: 64px 6% 56px;
+    flex-wrap: wrap;
+    background: var(--mint);
+  }
+  .hero-texto { flex: 1 1 380px; }
+  .eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--forest);
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+  .hero-texto h1 {
+    font-size: clamp(30px, 4.5vw, 44px);
+    color: var(--forest-deep);
+    line-height: 1.15;
+    margin: 0 0 18px;
+    max-width: 480px;
+  }
+  .hero-texto p {
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 440px;
+    line-height: 1.6;
+    margin-bottom: 26px;
+  }
+  .botones { display: flex; gap: 14px; }
+  .btn {
+    padding: 12px 22px;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .btn-primario { background: var(--forest); color: #fff; border: none; }
+  .btn-secundario { background: transparent; color: var(--forest); border: 1px solid var(--forest); }
+
+  .hero-visual {
+    flex: 1 1 320px;
+    min-height: 340px;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+  }
+  .slide.activa { opacity: 1; }
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .puntos-carrusel {
+    position: absolute;
+    bottom: 14px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+  .punto {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--mint-line);
+    cursor: pointer;
+    border: none;
+    padding: 0;
+  }
+  .punto.activo { background: var(--forest); }
+
+  .franja-confianza {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    padding: 20px 6%;
+    border-bottom: 1px solid var(--mint-line);
+  }
+  .franja-item { font-size: 13px; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
+  .franja-item::before { content: "•"; color: var(--amber); font-weight: 700; }
+
+  /* Secciones internas */
+  .contenido { padding: 48px 6% 80px; }
+  .contenido h2 {
+    font-size: 28px;
+    color: var(--forest-deep);
+    margin-bottom: 8px;
+  }
+  .contenido > p.subtitulo {
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    max-width: 460px;
+  }
+
+  .filtros { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+  .chip {
+    border: 1px solid var(--mint-line);
+    background: var(--mint);
+    color: var(--forest);
+    font-size: 13px;
+    padding: 7px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  .chip.activo { background: var(--forest); color: #fff; border-color: var(--forest); }
+
+  .grid-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  .tarjeta {
+    background: var(--white);
+    border: 1px solid var(--mint-line);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .tarjeta-img {
+    background: var(--mint);
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tarjeta-img svg { width: 40px; height: 40px; }
+  .tarjeta-cuerpo { padding: 16px; flex: 1; display: flex; flex-direction: column; }
+  .tarjeta .categoria {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--forest);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .tarjeta .marca { font-size: 12px; color: var(--text-muted); margin: 0 0 2px; }
+  .tarjeta h3 { font-size: 16px; color: var(--text); margin: 0 0 6px; line-height: 1.3; }
+  .tarjeta .presentacion { font-size: 12px; color: var(--text-muted); margin: 0 0 14px; }
+  .tarjeta .etiqueta-fila { display: flex; align-items: center; justify-content: flex-end; margin-top: auto; margin-bottom: 12px; min-height: 20px; }
+  .tarjeta .etiqueta {
+    font-size: 10px;
+    background: var(--amber-bg);
+    color: var(--amber);
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .btn-ver {
+    width: 100%;
+    background: var(--mint);
+    color: var(--forest-deep);
+    border: 1px solid var(--mint-line);
+    padding: 9px;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .btn-ver:hover { background: var(--mint-line); }
+
+  .modal-fondo {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(18, 41, 31, 0.45);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 50;
+  }
+  .modal-fondo.activo { display: flex; }
+  .modal {
+    background: #fff;
+    border-radius: 10px;
+    max-width: 420px;
+    width: 100%;
+    max-height: 88vh;
+    max-height: 88dvh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  .modal-img {
+    background: var(--mint);
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: zoom-in;
+    overflow: hidden;
+  }
+  .modal-img #modal-icono {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .modal-cerrar {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #fff;
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 15px;
+    color: var(--text-muted);
+  }
+  .modal-cuerpo { padding: 22px; }
+  .modal-cuerpo .categoria { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--forest); font-weight: 600; margin-bottom: 8px; }
+  .modal-cuerpo .marca { font-size: 13px; color: var(--text-muted); margin: 0 0 2px; }
+  .modal-cuerpo h3 { font-size: 21px; color: var(--text); margin: 0 0 12px; }
+  .modal-specs { list-style: none; padding: 0; margin: 0 0 18px; border-top: 1px solid var(--mint-line); }
+  .modal-specs li {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--mint-line);
+  }
+  .modal-specs li span:first-child { color: var(--text-muted); }
+  .modal-specs li span:last-child { color: var(--text); font-weight: 500; text-align: right; }
+  .btn-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    background: #25A25A;
+    color: #fff;
+    border: none;
+    padding: 13px;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .btn-whatsapp svg { width: 18px; height: 18px; fill: #fff; }
+
+  .lightbox-fondo {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    z-index: 100;
+    cursor: zoom-out;
+  }
+  .lightbox-fondo.activo { display: flex; }
+  .lightbox-fondo img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 6px;
+    object-fit: contain;
+  }
+  .lightbox-cerrar {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    background: #fff;
+    border: none;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 17px;
+    color: var(--text);
+  }
+
+  .confirm-fondo {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(18, 41, 31, 0.5);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 120;
+  }
+  .confirm-fondo.activo { display: flex; }
+  .confirm-caja {
+    background: #fff;
+    border-radius: 10px;
+    max-width: 360px;
+    width: 100%;
+    padding: 24px;
+    text-align: center;
+  }
+  .confirm-caja p { font-size: 15px; color: var(--text); margin: 0 0 20px; }
+  .confirm-botones { display: flex; gap: 10px; }
+  .confirm-botones button {
+    flex: 1;
+    padding: 11px;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+  }
+  .confirm-si { background: #B23434; color: #fff; }
+  .confirm-si:hover { filter: brightness(1.1); }
+  .confirm-no { background: var(--mint); color: var(--text); }
+  .confirm-no:hover { background: var(--mint-line); }
+
+  .lista-articulos {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 640px;
+  }
+  .articulo {
+    border-bottom: 1px solid var(--mint-line);
+    padding-bottom: 24px;
+  }
+  .articulo { cursor: pointer; transition: opacity 0.15s; }
+  .articulo:hover { opacity: 0.8; }
+  .articulo .fecha { font-size: 12px; color: var(--forest); margin-bottom: 8px; font-weight: 600; }
+  .articulo h3 { font-size: 20px; color: var(--forest-deep); margin: 0 0 8px; }
+  .articulo p { font-size: 14px; color: var(--text-muted); margin: 0; }
+  .articulo .leer-mas { display: inline-block; margin-top: 8px; font-size: 13px; font-weight: 600; color: var(--forest); }
+
+  .modal-articulo-fondo {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(18, 41, 31, 0.45);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 50;
+  }
+  .modal-articulo-fondo.activo { display: flex; }
+  .modal-articulo {
+    background: #fff;
+    border-radius: 10px;
+    max-width: 560px;
+    width: 100%;
+    max-height: 88vh;
+    max-height: 88dvh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+  }
+  .modal-articulo-cuerpo { padding: 30px 26px 26px; }
+  .modal-articulo-cuerpo .fecha { font-size: 12px; color: var(--forest); font-weight: 600; margin: 0 0 8px; }
+  .modal-articulo-cuerpo h3 { font-size: 22px; color: var(--text); margin: 0 0 18px; line-height: 1.3; }
+  #articulo-modal-texto p { font-size: 14px; line-height: 1.7; color: var(--text); margin: 0 0 14px; }
+  #articulo-modal-texto p:last-child { margin-bottom: 0; }
+
+
+  footer {
+    padding: 24px 6%;
+    border-top: 1px solid var(--mint-line);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .nav-admin-link {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--text-muted);
+    opacity: 0.6;
+  }
+  .nav-admin-link:hover { opacity: 1; }
+
+  .admin-login {
+    max-width: 340px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 60px 20px;
+  }
+  .admin-login p { color: var(--text-muted); margin-bottom: 20px; font-size: 14px; }
+  .campo { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; text-align: left; min-width: 0; }
+  .campo label { font-size: 12px; color: var(--text-muted); font-weight: 600; }
+  .campo input, .campo select, .campo textarea {
+    padding: 10px 12px;
+    border: 1px solid var(--mint-line);
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    width: 100%;
+    min-width: 0;
+  }
+  .admin-panel { display: none; }
+  .admin-panel.activo { display: block; }
+  .admin-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; }
+  .admin-form { background: var(--mint); border: 1px solid var(--mint-line); border-radius: 8px; padding: 24px; margin-bottom: 36px; max-width: 560px; }
+  .admin-form h3 { margin: 0 0 16px; color: var(--forest-deep); }
+
+  @media (max-width: 520px) {
+    .admin-grid { grid-template-columns: 1fr; }
+    .admin-form { padding: 16px; }
+  }
+  .lista-admin { display: flex; flex-direction: column; gap: 10px; max-width: 700px; }
+  .item-admin {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--mint-line);
+    border-radius: 6px;
+    padding: 12px 16px;
+  }
+  .item-admin .info-nombre { font-weight: 600; font-size: 14px; }
+  .item-admin .info-meta { font-size: 12px; color: var(--text-muted); }
+  .btn-eliminar {
+    background: #FBEAEA;
+    color: #B23434;
+    border: none;
+    padding: 7px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .aviso-local {
+    background: var(--amber-bg);
+    color: var(--amber);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 12px;
+    margin-bottom: 24px;
+    max-width: 560px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-top">
+    <div class="logo">
+      <img src="logo-ecuaperu.png" alt="ECUAPERU" style="height:46px; width:auto; border-radius:4px;" />
+      <img src="logo-personaje.png" alt="Ecuaperu productos naturales" style="height:46px; width:46px; object-fit:cover; border-radius:50%; margin-left:8px;" />
+    </div>
+    <button class="nav-admin-link" data-pagina="admin">Admin</button>
+  </div>
+  <div class="nav-links">
+    <button data-pagina="inicio" class="activo">Inicio</button>
+    <button data-pagina="catalogo">Catálogo</button>
+    <button data-pagina="blog">Blog</button>
+  </div>
+</nav>
+
+<section id="inicio" class="activa">
+  <div class="hero">
+    <div class="hero-texto">
+      <p class="eyebrow">Tu tienda naturista de confianza</p>
+      <h1 class="serif">Vitaminas, suplementos y remedios naturales, seleccionados para vos.</h1>
+      <p>Trabajamos con marcas naturistas reconocidas para acercarte productos de calidad: jarabes, cápsulas, extractos y más — con la atención de un proveedor pequeño y cercano.</p>
+      <div class="botones">
+        <button class="btn btn-primario" data-ir="catalogo">Ver catálogo</button>
+        <button class="btn btn-secundario" data-ir="blog">Leer el blog</button>
+      </div>
+    </div>
+    <div class="hero-visual" id="hero-visual">
+      <div class="slide activa"><img src="hero-1.png" alt="Producto natural" /></div>
+      <div class="slide"><img src="hero-2.png" alt="Producto natural" /></div>
+      <div class="slide"><img src="hero-3.png" alt="Producto natural" /></div>
+      <div class="puntos-carrusel" id="puntos-carrusel"></div>
+    </div>
+  </div>
+  <div class="franja-confianza">
+    <span class="franja-item">Marcas naturistas reconocidas</span>
+    <span class="franja-item">Registro sanitario verificado</span>
+    <span class="franja-item">Atención personalizada</span>
+  </div>
+</section>
+
+<section id="catalogo">
+  <div class="contenido">
+    <h2 class="serif">Catálogo</h2>
+    <p class="subtitulo">Productos de muestra — aquí conectaremos el inventario real más adelante.</p>
+    <div class="filtros" id="filtros"></div>
+    <div class="grid-productos" id="grid-productos"></div>
+  </div>
+</section>
+
+<section id="blog">
+  <div class="contenido">
+    <h2 class="serif">Blog</h2>
+    <p class="subtitulo">Artículos sobre salud natural, suplementación y bienestar.</p>
+    <div class="lista-articulos" id="lista-articulos"></div>
+  </div>
+</section>
+
+<div class="modal-articulo-fondo" id="articulo-modal-fondo">
+  <div class="modal-articulo">
+    <button class="modal-cerrar" id="articulo-modal-cerrar">✕</button>
+    <div class="modal-articulo-cuerpo">
+      <p class="fecha" id="articulo-modal-fecha"></p>
+      <h3 class="serif" id="articulo-modal-titulo"></h3>
+      <div id="articulo-modal-texto"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-fondo" id="modal-fondo">
+  <div class="modal">
+    <div class="modal-img" id="modal-img-cont">
+      <button class="modal-cerrar" id="modal-cerrar">✕</button>
+      <span id="modal-icono" class="modal-icono-clic"></span>
+    </div>
+    <div class="modal-cuerpo">
+      <p class="categoria" id="modal-categoria"></p>
+      <p class="marca" id="modal-marca"></p>
+      <h3 class="serif" id="modal-nombre"></h3>
+      <ul class="modal-specs" id="modal-specs"></ul>
+      <a class="btn-whatsapp" id="modal-whatsapp" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 0 0 4.84 1.23h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2Zm0 18.2h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.11.81.83-3.03-.2-.31a8.22 8.22 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.42 5.83c0 4.55-3.7 8.23-8.26 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.22-1.46-1.37-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05 0 1.2.88 2.37 1 2.53.12.17 1.73 2.64 4.2 3.7.59.25 1.05.4 1.4.52.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z"/></svg>
+        Consultar por WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="lightbox-fondo" id="lightbox-fondo">
+  <button class="lightbox-cerrar" id="lightbox-cerrar">✕</button>
+  <img id="lightbox-img" src="" alt="" />
+</div>
+
+<div class="confirm-fondo" id="confirm-fondo">
+  <div class="confirm-caja">
+    <p>¿Estás seguro que quieres eliminar el producto?</p>
+    <div class="confirm-botones">
+      <button class="confirm-no" id="confirm-no">No</button>
+      <button class="confirm-si" id="confirm-si">Sí, eliminar</button>
+    </div>
+  </div>
+</div>
+
+
+<section id="admin">
+  <div class="contenido">
+    <div id="admin-login" class="admin-login">
+      <h2 class="serif">Acceso administrador</h2>
+      <p>Ingresa la clave para gestionar los productos del catálogo.</p>
+      <div class="campo">
+        <input type="password" id="admin-password" placeholder="Clave de acceso" />
+      </div>
+      <button class="btn btn-primario" style="width:100%" onclick="verificarPassword()">Ingresar</button>
+      <p id="admin-error" style="color:#B23434; display:none; margin-top:10px;">Clave incorrecta</p>
+    </div>
+
+    <div id="admin-panel" class="admin-panel">
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+        <h2 class="serif" style="margin:0;">Panel de productos naturales</h2>
+        <button onclick="cerrarSesionAdmin()" style="background:none; border:1px solid var(--mint-line); color:var(--text-muted); padding:8px 14px; border-radius:4px; font-family:'Inter',sans-serif; font-size:13px; cursor:pointer;">Cerrar sesión</button>
+      </div>
+      <p class="aviso-local">Los productos que agregues aquí se guardan en la base de datos y se ven al instante en el catálogo de cualquier visitante del sitio, desde cualquier lugar.</p>
+
+      <div class="admin-form">
+        <h3 class="serif">Agregar producto</h3>
+        <form id="form-producto" onsubmit="agregarProducto(event)">
+          <div class="admin-grid">
+            <div class="campo">
+              <label>Nombre del producto</label>
+              <input type="text" id="f-nombre" required />
+            </div>
+            <div class="campo">
+              <label>Marca</label>
+              <input type="text" id="f-marca" required />
+            </div>
+            <div class="campo">
+              <label>Categoría</label>
+              <input type="text" id="f-categoria" required placeholder="Ej: Vitaminas y minerales" />
+            </div>
+            <div class="campo">
+              <label>Presentación</label>
+              <input type="text" id="f-presentacion" required placeholder="Ej: 60 cápsulas" />
+            </div>
+            <div class="campo">
+              <label>Registro sanitario</label>
+              <input type="text" id="f-registro" />
+            </div>
+            <div class="campo">
+              <label>Etiqueta (opcional)</label>
+              <input type="text" id="f-etiqueta" placeholder="Ej: Nuevo, Popular" />
+            </div>
+          </div>
+          <div class="campo">
+            <label>Foto del producto</label>
+            <input type="file" id="f-foto" accept="image/*" />
+          </div>
+          <div class="campo">
+            <label>Indicaciones / descripción</label>
+            <textarea id="f-indicaciones" rows="2" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primario">Agregar al catálogo</button>
+        </form>
+      </div>
+
+      <h3 class="serif" style="color:var(--forest-deep)">Productos actuales</h3>
+      <div class="lista-admin" id="lista-admin"></div>
+    </div>
+  </div>
+</section>
+
+<footer>ECUAPERU — suplementos y remedios naturistas</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const iconoFrasco = `<svg viewBox="0 0 24 24" fill="none" stroke="#1F8A4C" stroke-width="1.5"><path d="M9 2h6v3.5l3 4.5v9a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-9l3-4.5V2Z"/><path d="M7.5 13h9"/></svg>`;
+
+  const NUMERO_WHATSAPP = "593939471592";
+  const CLAVE_ADMIN = "ecuaperu2026"; // TODO: cámbiala por una clave propia
+
+  // --- Conexión con Supabase ---
+  // TODO: reemplaza estos dos valores con los tuyos.
+  // Los encuentras en Supabase: Project Settings > API > "Project URL" y "anon public key".
+  const SUPABASE_URL = "https://nxqtwpzpcrtbufhziwps.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_e8tzaFBZn3V5rnKT4ygCLw_5DrpCSP3";
+  const NOMBRE_BUCKET_FOTOS = "fotos-productos";
+
+  const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  async function cargarProductos() {
+    const { data, error } = await db
+      .from("productos")
+      .select("*")
+      .order("creado_en", { ascending: true });
+    if (error) {
+      console.error("Error al cargar productos:", error);
+      alert("No se pudieron cargar los productos. Revisa la conexión con Supabase (URL/llave) en el código.");
+      return [];
+    }
+    // Mapeamos foto_url (nombre de columna en la base de datos) a "foto" (nombre usado en el resto del código)
+    return data.map(p => ({ ...p, foto: p.foto_url }));
+  }
+
+  let productos = [];
+  let filtroActivo = "Todos";
+
+  const articulos = [
+    {
+      titulo: "Vitaminas del complejo B: para qué sirve cada una",
+      fecha: "12 ago 2026",
+      resumen: "Una guía breve para entender qué vitamina del grupo B puede acompañar tu día a día según tus necesidades.",
+      cuerpo: [
+        "Las vitaminas del complejo B son un grupo de nutrientes que trabajan juntos para apoyar la obtención de energía a partir de los alimentos, el buen funcionamiento del sistema nervioso y la formación de glóbulos rojos. Aunque suelen mencionarse en conjunto, cada una cumple un papel algo distinto.",
+        "La B1 (tiamina) y la B2 (riboflavina) participan en el metabolismo energético de carbohidratos y grasas. La B3 (niacina) contribuye a mantener la piel y el sistema digestivo en buen estado. La B6 (piridoxina) está relacionada con el metabolismo de proteínas y con la producción de neurotransmisores, por lo que a veces se asocia con el estado de ánimo.",
+        "La B9 (ácido fólico) es especialmente relevante en la formación de células nuevas, y la B12 (cobalamina) es clave para el sistema nervioso y la producción de glóbulos rojos; esta última se encuentra casi exclusivamente en alimentos de origen animal, por lo que quienes siguen dietas vegetarianas o veganas suelen prestarle especial atención.",
+        "Una alimentación variada suele cubrir las necesidades diarias de la mayoría de las personas, pero hay etapas o situaciones (como el cansancio prolongado, dietas restrictivas o mayor demanda física) donde un complemento puede ser de ayuda. Como con cualquier suplemento, lo ideal es consultar con un profesional de la salud antes de empezar a tomarlo, sobre todo si ya tomas otros medicamentos.",
+      ],
+    },
+    {
+      titulo: "Adaptógenos: qué son y cómo elegir el tuyo",
+      fecha: "20 ago 2026",
+      resumen: "Ashwagandha, rhodiola y otros aliados naturales que se usan tradicionalmente para acompañar el manejo del estrés diario.",
+      cuerpo: [
+        "Los adaptógenos son un grupo de plantas y hongos que se han usado tradicionalmente en distintas culturas (India, China, Rusia) con la idea de ayudar al cuerpo a manejar mejor situaciones de estrés físico o mental. El término fue popularizado por investigadores rusos en el siglo XX para describir sustancias que, según la tradición, ayudan al organismo a adaptarse sin generar efectos estimulantes fuertes.",
+        "La ashwagandha es probablemente el adaptógeno más conocido hoy en día. Se usa tradicionalmente en la medicina ayurvédica y suele asociarse con el apoyo al descanso y al manejo del estrés cotidiano. La rhodiola rosea, originaria de zonas frías de Europa y Asia, se ha usado tradicionalmente para acompañar periodos de mayor exigencia física o mental.",
+        "Otros adaptógenos conocidos incluyen el ginseng (asiático o americano), asociado tradicionalmente con la energía y la vitalidad, y la maca andina, muy usada en Perú y Ecuador, vinculada tradicionalmente con la resistencia física.",
+        "A la hora de elegir uno, conviene pensar en qué necesitas apoyar (descanso, energía, manejo del estrés) y empezar con dosis bajas para ver cómo responde tu cuerpo. No reemplazan un buen descanso, una alimentación balanceada ni la atención médica cuando es necesaria — son un complemento, no una solución mágica. Si tomas otros medicamentos o tienes alguna condición de salud, consulta primero con tu médico.",
+      ],
+    },
+    {
+      titulo: "Colágeno: qué hace en tu cuerpo y cómo tomarlo bien",
+      fecha: "25 ago 2026",
+      resumen: "Qué esperar realmente de un suplemento de colágeno, y algunos consejos para sacarle mejor provecho.",
+      cuerpo: [
+        "El colágeno es la proteína más abundante en el cuerpo humano. Forma parte de la piel, los cartílagos, los tendones, los huesos y otros tejidos conectivos. A partir de los 25-30 años, el cuerpo empieza a producir naturalmente menos colágeno cada año, lo cual con el tiempo se relaciona con cambios en la elasticidad de la piel y en la salud articular.",
+        "Los suplementos de colágeno más comunes son hidrolizados (o 'péptidos de colágeno'), es decir, la proteína se ha descompuesto en fragmentos más pequeños para facilitar su absorción. Suelen combinarse con vitamina C, ya que esta vitamina participa en el proceso natural de síntesis de colágeno del propio cuerpo, o con magnesio, relacionado con la función muscular y ósea.",
+        "No existe una 'mejor hora' universal para tomarlo: lo importante es la constancia. Muchas personas lo incorporan en una bebida durante el desayuno o antes de dormir. Los resultados relacionados con piel o articulaciones, cuando se reportan, suelen notarse después de varias semanas de uso continuo, no de un día para otro.",
+        "El colágeno en polvo o cápsulas es un complemento alimenticio, no un medicamento, y su efecto puede variar de una persona a otra. Si tienes alguna condición médica o estás embarazada o en lactancia, consulta con tu médico antes de agregar cualquier suplemento a tu rutina.",
+      ],
+    },
+    {
+      titulo: "Fibra natural: avena, chía y pitahaya en tu día a día",
+      fecha: "27 ago 2026",
+      resumen: "Por qué la fibra es importante, y qué aportan ingredientes como la chía, la avena y la pitahaya.",
+      cuerpo: [
+        "La fibra es un tipo de carbohidrato que el cuerpo no digiere completamente, y cumple un rol importante en el tránsito intestinal y en la sensación de saciedad. Se suele dividir en fibra soluble (que se disuelve en agua y forma un gel) e insoluble (que añade volumen y ayuda al movimiento intestinal).",
+        "La avena aporta fibra soluble (beta-glucanos), muy estudiada por su relación con niveles saludables de colesterol dentro de una dieta balanceada. La chía es rica en fibra y en ácidos grasos omega-3 de origen vegetal, y al hidratarse forma un gel característico que puede ayudar a la sensación de saciedad. La pitahaya (fruta del dragón), además de fibra, aporta antioxidantes y suele apreciarse por su bajo aporte calórico.",
+        "Los complementos alimenticios en polvo que combinan estos ingredientes (junto con otros como alcachofa o cúrcuma) buscan ofrecer una forma práctica de sumar fibra a la dieta diaria, mezclándolos con agua o jugo. Aun así, no reemplazan el consumo de frutas, verduras y granos enteros en las comidas del día.",
+        "Si vas a incorporar más fibra de la que consumes habitualmente, es recomendable hacerlo de forma gradual y acompañarla de suficiente agua, para evitar molestias digestivas. Ante cualquier problema digestivo persistente, lo mejor es consultar con un profesional de la salud.",
+      ],
+    },
+    {
+      titulo: "Depurativos naturales: ortiga, alcachofa y carbón activado",
+      fecha: "28 ago 2026",
+      resumen: "Qué se dice tradicionalmente sobre estos tres ingredientes y qué esperar realmente de ellos.",
+      cuerpo: [
+        "Ortiga, alcachofa y carbón activado son tres ingredientes frecuentes en la línea de productos 'depurativos' de la medicina natural. Vale la pena entender qué hace cada uno y, sobre todo, qué NO hacen: ninguno de ellos 'limpia' órganos internos en el sentido médico de la palabra — el hígado y los riñones ya cumplen esa función de forma natural en un cuerpo sano.",
+        "La ortiga se ha usado tradicionalmente por sus propiedades diuréticas leves, es decir, puede favorecer la eliminación de líquidos, lo que popularmente se asocia con sensación de menor hinchazón. La alcachofa contiene cinarina, un compuesto que tradicionalmente se relaciona con el apoyo a la función digestiva y hepática dentro de hábitos saludables.",
+        "El carbón activado es distinto: se trata de un carbón procesado con una superficie porosa muy grande, capaz de adsorber (retener en su superficie) ciertas sustancias en el tracto digestivo. Por eso se usa en el ámbito médico para casos puntuales de intoxicación, bajo supervisión profesional. En complementos alimenticios de venta libre se usa en dosis mucho menores, asociado tradicionalmente al alivio de molestias digestivas como gases o hinchazón.",
+        "Importante: el carbón activado puede interferir con la absorción de medicamentos si se toman muy cerca en el tiempo, así que si tomas alguna medicación regular, consulta a tu médico o farmacéutico antes de combinarlo. Ninguno de estos productos sustituye una dieta equilibrada, buena hidratación ni la atención médica cuando hay un problema de salud real.",
+      ],
+    },
+    {
+      titulo: "Energía y vitalidad: qué esperar de los complementos naturales",
+      fecha: "29 ago 2026",
+      resumen: "Una mirada honesta a los suplementos de energía y vitalidad, y por qué conviene tener expectativas realistas.",
+      cuerpo: [
+        "Los complementos naturales orientados a la energía y la vitalidad suelen combinar ingredientes tradicionales como ginseng, maca, guaraná o extractos de plantas amazónicas. Se comercializan con la promesa de más energía, mejor rendimiento físico o apoyo a la vitalidad general, y muchos de estos ingredientes tienen un uso tradicional de larga data en distintas culturas.",
+        "Es importante diferenciar entre el uso tradicional de una planta y una alegación médica. Un complemento alimenticio puede 'apoyar la vitalidad' o 'ayudar a sentirte más activo', pero legalmente no puede afirmar que cura, trata o previene una enfermedad (por ejemplo, no puede decir que trata el cáncer, la disfunción eréctil como condición médica, o cualquier otra patología) — ese tipo de afirmaciones corresponden a medicamentos regulados y evaluados clínicamente, no a suplementos de venta libre.",
+        "Si buscas más energía en el día a día, los complementos pueden ser un apoyo, pero conviene revisar primero lo básico: calidad del sueño, hidratación, actividad física regular y una alimentación balanceada suelen tener más impacto que cualquier suplemento por sí solo.",
+        "Si notas cansancio persistente, cambios en tu energía que no mejoran, o cualquier síntoma que te preocupe (incluyendo temas de salud sexual o próstata), lo correcto es consultar con un médico para descartar causas de fondo, en lugar de depender únicamente de un complemento natural.",
+      ],
+    },
+  ];
+
+  const filtrosEl = document.getElementById("filtros");
+  function renderFiltros() {
+    const categorias = ["Todos", ...new Set(productos.map(p => p.categoria))];
+    if (!categorias.includes(filtroActivo)) filtroActivo = "Todos";
+    filtrosEl.innerHTML = "";
+    categorias.forEach(c => {
+      const chip = document.createElement("button");
+      chip.className = "chip" + (c === filtroActivo ? " activo" : "");
+      chip.textContent = c;
+      chip.addEventListener("click", () => {
+        filtroActivo = c;
+        renderFiltros();
+        renderProductos();
+      });
+      filtrosEl.appendChild(chip);
+    });
+  }
+
+  const gridProductos = document.getElementById("grid-productos");
+  function renderProductos() {
+    const lista = filtroActivo === "Todos" ? productos : productos.filter(p => p.categoria === filtroActivo);
+    gridProductos.innerHTML = lista.map((p, i) => `
+      <div class="tarjeta">
+        <div class="tarjeta-img">${p.foto ? `<img src="${p.foto}" alt="${p.nombre}" style="width:100%;height:100%;object-fit:cover;" />` : iconoFrasco}</div>
+        <div class="tarjeta-cuerpo">
+          <p class="categoria">${p.categoria}</p>
+          <p class="marca">${p.marca}</p>
+          <h3>${p.nombre}</h3>
+          <p class="presentacion">${p.presentacion}</p>
+          <div class="etiqueta-fila">
+            ${p.etiqueta ? `<span class="etiqueta">${p.etiqueta}</span>` : ""}
+          </div>
+          <button class="btn-ver" onclick="abrirModal(${p.id})">Ver</button>
+        </div>
+      </div>`).join("");
+  }
+
+  async function recargarProductos() {
+    productos = await cargarProductos();
+    renderFiltros();
+    renderProductos();
+  }
+
+  function abrirModal(id) {
+    const p = productos.find(x => x.id === id);
+    if (!p) return;
+    document.getElementById("modal-icono").innerHTML = p.foto ? `<img src="${p.foto}" alt="${p.nombre}" style="width:100%;height:100%;object-fit:cover;" />` : iconoFrasco;
+    document.getElementById("modal-categoria").textContent = p.categoria;
+    document.getElementById("modal-marca").textContent = p.marca;
+    document.getElementById("modal-nombre").textContent = p.nombre;
+    document.getElementById("modal-specs").innerHTML = `
+      <li><span>Presentación</span><span>${p.presentacion}</span></li>
+      <li><span>Indicado para</span><span>${p.indicaciones}</span></li>
+      <li><span>Registro sanitario</span><span>${p.registro || "—"}</span></li>
+    `;
+    const mensaje = encodeURIComponent(`Hola, me interesa el producto "${p.nombre}" (${p.marca}). ¿Me pueden dar el precio y disponibilidad?`);
+    document.getElementById("modal-whatsapp").href = `https://wa.me/${NUMERO_WHATSAPP}?text=${mensaje}`;
+    document.getElementById("modal-fondo").classList.add("activo");
+
+    const contImg = document.getElementById("modal-icono");
+    if (p.foto) {
+      contImg.style.cursor = "zoom-in";
+      contImg.onclick = () => abrirLightbox(p.foto, p.nombre);
+    } else {
+      contImg.style.cursor = "default";
+      contImg.onclick = null;
+    }
+  }
+
+  document.getElementById("modal-cerrar").addEventListener("click", (e) => {
+    e.stopPropagation();
+    document.getElementById("modal-fondo").classList.remove("activo");
+  });
+  document.getElementById("modal-fondo").addEventListener("click", (e) => {
+    if (e.target.id === "modal-fondo") e.currentTarget.classList.remove("activo");
+  });
+
+  function abrirLightbox(src, alt) {
+    const img = document.getElementById("lightbox-img");
+    img.src = src;
+    img.alt = alt || "";
+    document.getElementById("lightbox-fondo").classList.add("activo");
+  }
+  document.getElementById("lightbox-cerrar").addEventListener("click", () => {
+    document.getElementById("lightbox-fondo").classList.remove("activo");
+  });
+  document.getElementById("lightbox-fondo").addEventListener("click", (e) => {
+    if (e.target.id === "lightbox-fondo") e.currentTarget.classList.remove("activo");
+  });
+
+  const listaArticulos = document.getElementById("lista-articulos");
+  articulos.forEach((a, i) => {
+    listaArticulos.innerHTML += `
+      <div class="articulo" onclick="abrirArticulo(${i})">
+        <p class="fecha">${a.fecha}</p>
+        <h3 class="serif">${a.titulo}</h3>
+        <p>${a.resumen}</p>
+        <span class="leer-mas">Leer más →</span>
+      </div>`;
+  });
+
+  function abrirArticulo(i) {
+    const a = articulos[i];
+    if (!a) return;
+    document.getElementById("articulo-modal-fecha").textContent = a.fecha;
+    document.getElementById("articulo-modal-titulo").textContent = a.titulo;
+    document.getElementById("articulo-modal-texto").innerHTML = a.cuerpo.map(p => `<p>${p}</p>`).join("");
+    document.getElementById("articulo-modal-fondo").classList.add("activo");
+  }
+  document.getElementById("articulo-modal-cerrar").addEventListener("click", (e) => {
+    e.stopPropagation();
+    document.getElementById("articulo-modal-fondo").classList.remove("activo");
+  });
+  document.getElementById("articulo-modal-fondo").addEventListener("click", (e) => {
+    if (e.target.id === "articulo-modal-fondo") e.currentTarget.classList.remove("activo");
+  });
+
+  function irA(pagina) {
+    document.querySelectorAll("section").forEach(s => s.classList.remove("activa"));
+    document.getElementById(pagina).classList.add("activa");
+    document.querySelectorAll(".nav-links button").forEach(b => {
+      b.classList.toggle("activo", b.dataset.pagina === pagina);
+    });
+    if (window.location.hash !== "#" + pagina) {
+      history.replaceState(null, "", "#" + pagina);
+    }
+  }
+
+  // --- Carrusel del hero ---
+  const slides = document.querySelectorAll("#hero-visual .slide");
+  const puntosCarrusel = document.getElementById("puntos-carrusel");
+  let slideActual = 0;
+
+  slides.forEach((_, i) => {
+    const punto = document.createElement("button");
+    punto.className = "punto" + (i === 0 ? " activo" : "");
+    punto.addEventListener("click", () => irASlide(i));
+    puntosCarrusel.appendChild(punto);
+  });
+
+  function irASlide(indice) {
+    slides[slideActual].classList.remove("activa");
+    puntosCarrusel.children[slideActual].classList.remove("activo");
+    slideActual = indice;
+    slides[slideActual].classList.add("activa");
+    puntosCarrusel.children[slideActual].classList.add("activo");
+  }
+
+  setInterval(() => {
+    irASlide((slideActual + 1) % slides.length);
+  }, 4000);
+
+  document.querySelectorAll(".nav-links button").forEach(b => {
+    b.addEventListener("click", () => irA(b.dataset.pagina));
+  });
+  document.querySelector(".nav-admin-link").addEventListener("click", () => {
+    irA("admin");
+    mostrarAdmin();
+  });
+  document.querySelectorAll("[data-ir]").forEach(b => {
+    b.addEventListener("click", () => irA(b.dataset.ir));
+  });
+
+  // --- Panel de administración ---
+  // La sesión de administrador dura 30 minutos y se guarda solo mientras el
+  // navegador esté abierto (sessionStorage): si cierras la pestaña, se cierra la sesión.
+  const CLAVE_SESION = "ecuaperu_admin_sesion";
+  const DURACION_SESION_MS = 30 * 60 * 1000; // 30 minutos
+  let adminAutenticado = false;
+
+  function guardarSesionAdmin() {
+    sessionStorage.setItem(CLAVE_SESION, JSON.stringify({ expira: Date.now() + DURACION_SESION_MS }));
+  }
+  function sesionAdminValida() {
+    try {
+      const datos = JSON.parse(sessionStorage.getItem(CLAVE_SESION));
+      return !!datos && Date.now() < datos.expira;
+    } catch {
+      return false;
+    }
+  }
+  function cerrarSesionAdmin() {
+    sessionStorage.removeItem(CLAVE_SESION);
+    adminAutenticado = false;
+    document.getElementById("admin-password").value = "";
+    document.getElementById("admin-login").style.display = "block";
+    document.getElementById("admin-panel").classList.remove("activo");
+  }
+
+  // Muestra el panel directo si la sesión sigue vigente; si no, pide la clave.
+  function mostrarAdmin() {
+    if (sesionAdminValida()) {
+      adminAutenticado = true;
+      document.getElementById("admin-login").style.display = "none";
+      document.getElementById("admin-panel").classList.add("activo");
+      renderListaAdmin();
+    } else {
+      adminAutenticado = false;
+      document.getElementById("admin-login").style.display = "block";
+      document.getElementById("admin-panel").classList.remove("activo");
+    }
+  }
+
+  function verificarPassword() {
+    const clave = document.getElementById("admin-password").value;
+    if (clave === CLAVE_ADMIN) {
+      adminAutenticado = true;
+      guardarSesionAdmin();
+      document.getElementById("admin-login").style.display = "none";
+      document.getElementById("admin-panel").classList.add("activo");
+      renderListaAdmin();
+    } else {
+      document.getElementById("admin-error").style.display = "block";
+    }
+  }
+
+  async function subirFoto(archivo) {
+    if (!archivo) return null;
+    const nombreArchivo = `${Date.now()}-${archivo.name.replace(/[^a-zA-Z0-9.\-_]/g, "_")}`;
+    const { error: errorSubida } = await db.storage
+      .from(NOMBRE_BUCKET_FOTOS)
+      .upload(nombreArchivo, archivo);
+    if (errorSubida) {
+      throw new Error("No se pudo subir la foto: " + errorSubida.message);
+    }
+    const { data } = db.storage.from(NOMBRE_BUCKET_FOTOS).getPublicUrl(nombreArchivo);
+    return data.publicUrl;
+  }
+
+  async function agregarProducto(evento) {
+    evento.preventDefault();
+    const boton = evento.target.querySelector("button[type=submit]");
+    boton.disabled = true;
+    boton.textContent = "Guardando...";
+    try {
+      const archivoFoto = document.getElementById("f-foto").files[0];
+      let fotoUrl = null;
+      try {
+        fotoUrl = await subirFoto(archivoFoto);
+      } catch (err) {
+        alert(err.message + " Se agregará el producto sin imagen.");
+      }
+      const nuevo = {
+        nombre: document.getElementById("f-nombre").value.trim(),
+        marca: document.getElementById("f-marca").value.trim(),
+        categoria: document.getElementById("f-categoria").value.trim(),
+        presentacion: document.getElementById("f-presentacion").value.trim(),
+        registro: document.getElementById("f-registro").value.trim() || null,
+        etiqueta: document.getElementById("f-etiqueta").value.trim() || null,
+        indicaciones: document.getElementById("f-indicaciones").value.trim(),
+        foto_url: fotoUrl,
+      };
+      const { error } = await db.from("productos").insert(nuevo);
+      if (error) {
+        alert("No se pudo guardar el producto: " + error.message);
+        return;
+      }
+      document.getElementById("form-producto").reset();
+      await recargarProductos();
+      renderListaAdmin();
+    } finally {
+      boton.disabled = false;
+      boton.textContent = "Agregar al catálogo";
+    }
+  }
+
+  function pedirConfirmacion() {
+    return new Promise((resolve) => {
+      const fondo = document.getElementById("confirm-fondo");
+      const btnSi = document.getElementById("confirm-si");
+      const btnNo = document.getElementById("confirm-no");
+      fondo.classList.add("activo");
+
+      function limpiar(resultado) {
+        fondo.classList.remove("activo");
+        btnSi.removeEventListener("click", onSi);
+        btnNo.removeEventListener("click", onNo);
+        fondo.removeEventListener("click", onFondo);
+        resolve(resultado);
+      }
+      function onSi() { limpiar(true); }
+      function onNo() { limpiar(false); }
+      function onFondo(e) { if (e.target.id === "confirm-fondo") limpiar(false); }
+
+      btnSi.addEventListener("click", onSi);
+      btnNo.addEventListener("click", onNo);
+      fondo.addEventListener("click", onFondo);
+    });
+  }
+
+  async function eliminarProducto(id) {
+    const confirmado = await pedirConfirmacion();
+    if (!confirmado) return;
+    const { error } = await db.from("productos").delete().eq("id", id);
+    if (error) {
+      alert("No se pudo eliminar el producto: " + error.message);
+      return;
+    }
+    await recargarProductos();
+    renderListaAdmin();
+  }
+
+  function renderListaAdmin() {
+    const cont = document.getElementById("lista-admin");
+    cont.innerHTML = productos.map((p) => `
+      <div class="item-admin">
+        <div>
+          <div class="info-nombre">${p.nombre}</div>
+          <div class="info-meta">${p.marca} · ${p.categoria} · ${p.presentacion}</div>
+        </div>
+        <button class="btn-eliminar" onclick="eliminarProducto(${p.id})">Eliminar</button>
+      </div>`).join("");
+  }
+
+  // --- Arranque: cargar productos, y quedarnos en la misma sección al refrescar ---
+  async function init() {
+    await recargarProductos();
+
+    const secciones = ["inicio", "catalogo", "blog", "admin"];
+    const destino = window.location.hash.replace("#", "");
+    if (secciones.includes(destino)) {
+      irA(destino);
+      if (destino === "admin") mostrarAdmin();
+    }
+  }
+  init();
+</script>
+
+</body>
+</html>
